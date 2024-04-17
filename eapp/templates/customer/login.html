@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main style="background-color: #f5f5f5; padding: 20px;">
+
+    <!-- breadcrumb-area-start -->
+    <section style="background-color: #fff; padding: 20px; border-bottom: 1px solid #e0e0e0; border-radius: 10px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="breadcrumb-text text-center">
+                        <h1 style="font-size: 24px; color: #333; margin-bottom: 10px;">Login</h1>
+                        <ul class="breadcrumb-menu" style="list-style: none; padding: 0; margin: 0; display: flex; justify-content: center;">
+                            <li><a href="index.html" style="text-decoration: none; color: #007bff;">home</a></li>
+                            <li style="margin: 0 10px;"><span style="color: #007bff;">/</span></li>
+                            <li><span>Login</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+
+    <!-- login Area Strat-->
+    <section style="background-color: #fff; padding: 20px; border-bottom: 1px solid #e0e0e0; border-radius: 10px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="basic-login" style="background-color: #fff; padding: 30px; border: 1px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <h3 class="text-center mb-60" style="font-size: 24px; color: #333; margin-bottom: 30px;">Login From Here</h3>
+                        <!-- Your Django form starts here -->
+                        <form method="post">
+                            {% csrf_token %}
+                            <div style="margin-bottom: 20px;">
+                                <label for="email" style="font-size: 16px; color: #333; margin-bottom: 5px;">Email:</label>
+                                <input type="email" id="email" name="email" placeholder="Enter Username or Email address..." required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label for="password" style="font-size: 16px; color: #333; margin-bottom: 5px;">Password:</label>
+                                <input type="password" id="password" name="password" placeholder="Enter password..." required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
+                            </div>
+                            <div class="login-action mb-20 fix" style="display: flex; justify-content: space-between;">
+                                <span class="log-rem f-left" style="color: #333; font-size: 14px;">
+                                    <input id="remember" type="checkbox" name="remember" {% if request.POST.remember %} checked {% endif %}>
+                                    <label for="remember" style="margin-left: 5px;">Remember me!</label>
+                                </span>
+                                <span class="forgot-login f-right" style="color: #007bff; font-size: 14px;">
+                                    <a href="{% url 'forgot_password' %}" style="text-decoration: none; color: #007bff;">Lost your password?</a>
+                                </span>
+                            </div>
+                            <button class="btn theme-btn-2 w-100" type="submit" style="background-color: #007bff; color: white; border: none; padding: 14px; border-radius: 5px; cursor: pointer;">Login Now</button>
+                            <div class="or-divide" style="margin-top: 20px; text-align: center; font-size: 16px; color: #333;"><span>or</span></div>
+                            <!-- Register button -->
+                            <a href="{% url 'register' %}" class="btn theme-btn w-100" style="background-color: #17a2b8; color: white; border: none; padding: 14px; border-radius: 5px; cursor: pointer; margin-top: 10px; text-decoration: none; display: block; text-align: center;">Register Now</a>
+                        </form>
+                        <!-- Your Django form ends here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- login Area End-->
+
+</main>
+{% endblock %}

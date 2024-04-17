@@ -1,0 +1,365 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>S-GUARD</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="{% static 'site.html' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="{% static 'img/logo/logo.jpeg' %}"
+    />
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/meanmenu.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/default.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+
+  </head>
+  
+
+  <body>
+
+
+    <!-- header start -->
+    <header class="transparent-header transparent-header-2">
+      <div class="header-area box-90">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div
+              class="col-xl-2 col-lg-6 col-md-6 col-7 col-sm-3 d-flex align-items-center"
+            >
+              <!-- <div class="basic-bar cat-toggle">
+                <span class="bar1"></span>
+                <span class="bar2"></span>
+                <span class="bar3"></span>
+              </div> -->
+              <div class="logo">
+                <a href="index.html"
+                  ><img src="{% static 'img/logo/logo.jpeg' %}" alt=""
+                /></a>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-4">
+              <div class="sidebar-shop">
+                  <div class="shop-widget">
+                    
+                      <form action="{% url 'search_results' %}" method="GET" class="shop-search">
+                          <input type="text" name="q" placeholder="Your keyword...." />
+                          <button type="submit"><i class="fa fa-search"></i></button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          
+            
+            <div class="col-xl-7 col-lg-6 col-md-8 col-8 d-none d-xl-block">
+              <div class="main-menu menu-white text-center">
+                <nav id="mobile-menu">
+                  <ul>
+                    <li>
+                      <a style="background-color: #FFFF00; color: black; padding: 20px 60px; text-align: center; text-decoration: none; display: inline-block;" href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="mega-menu">
+                      <a style="background-color: #FFFF00; color: black; padding: 20px 60px; text-align: center; text-decoration: none; display: inline-block;" href="{% url 'product_list' %}">Shop</a>
+                    </li>
+                    <li>
+                      <a style="background-color: #FFFF00; color: black; padding: 20px 60px; text-align: center; text-decoration: none; display: inline-block;" href="{% url 'admin' %}">ADMIN LOGIN </a>
+                    </li>
+                    <!-- <li>
+                      <a style="background-color: #FFFF00; color: black; padding: 20px 60px; text-align: center; text-decoration: none; display: inline-block;" href="#">About</a>
+                    </li> -->
+                    <!-- <li>
+                      <a style="background-color: #FFFF00; color: black; padding: 20px 60px; text-align: center; text-decoration: none; display: inline-block;" href="{% url 'login' %}">LOGIN</a>
+                    </li> -->
+                    <li>
+                      <a style="background-color: #FFFF00; color: black; padding: 20px 60px; text-align: center; text-decoration: none; display: inline-block;" href="{% url 'cart' %}">CART</a>
+                    </li>
+                    <!-- <li>
+                      <a style="background-color: #FFFF00; color: black; padding: 20px 60px; text-align: center; text-decoration: none; display: inline-block;" href="{% url 'logout' %}">LOGOUT</a> -->
+                    <!-- </li> -->
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            
+             <div class="col-xl-3 col-lg-6 col-md-6 col-5 col-sm-9 pl-0">
+              <div class="header-right f-right">
+                  <ul>
+                      <!-- <li class="search-btn">
+                          <a class="search-btn nav-search search-trigger" href="#">
+                              
+                                <i class="fas fa-search fa-lg"></i> -->
+                          <!-- </a>
+                      </li>  -->
+                       
+                           
+                      <div style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+                        <ul>
+                            {% if user.is_authenticated %}
+                            <!-- If user is authenticated, display account button and logout button -->
+                            <li style="display: inline-block; margin-right: 20px;">
+                                <a href="{% url 'customer_dashboard' %}">
+                                    <!-- Larger user icon -->
+                                    <i class="fas fa-user-circle" style="font-size: 36px; color: #FFA500;"></i>
+                                </a>
+                                <!-- Dropdown menu for user actions -->
+                                <ul class="minicart" style="position: absolute; top: 100%; right: 0; background: white; border: 1px solid #ccc; padding: 10px;">
+                                    <!-- Orders -->
+                                    <li>
+                                        <a href="{% url 'order_list' %}">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            ORDERS
+                                        </a>
+                                    </li>
+                                    <!-- Profile -->
+                                    <li>
+                                        <a href="{% url 'edit_customer' %}">
+                                            <i class="fas fa-user"></i>
+                                            PROFILE
+                                        </a>
+                                    </li>
+                                    <!-- Address -->
+                                    <li>
+                                        <a href="{% url 'address_list' %}">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            ADDRESS
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <li style="display: inline-block; margin-right: 20px;">
+                                <a href="{% url 'logout' %}">
+                                    <!-- Larger logout icon -->
+                                    <i class="fas fa-sign-out-alt" style="font-size: 36px;"></i>
+                                </a>
+                            </li>
+                            {% else %}
+                            <!-- If user is not authenticated, display login button -->
+                            <li style="display: inline-block; margin-right: 20px;">
+                                <a href="{% url 'login' %}">
+                                    <!-- Larger login icon -->
+                                    <i class="fas fa-sign-in-alt" style="font-size: 36px;"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    
+          
+          <div class="col-12 d-xl-none">
+              <div class="mobile-menu"></div>
+          </div>
+      </div>
+  </div>
+</div>
+</header>
+    <!-- header end -->
+
+    <!-- Bootstrap Modal -->
+    {% if messages %}
+        <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+    {% block content %} {% endblock %}
+
+    <footer id="footer" style="background-color: #222; padding: 50px 0;">
+      <!-- top footer -->
+      <div class="section">
+          <!-- container -->
+          <div class="container">
+              <!-- row -->
+              <div class="row">
+                  <div class="col-md-3 col-xs-6">
+                      <div class="footer">
+                          <h3 class="footer-title" style="color: #fff; font-size: 18px; font-weight: bold;">About Us</h3>
+                          <p style="color: #ccc;">Always committed to serving you with excellence.</p>
+                          <ul class="footer-links">
+                              <li><a href="#" style="color: #ccc;"><i class="fa fa-map-marker"></i> Kozhikode</a></li>
+                              <li><a href="#" style="color: #ccc;"><i class="fa fa-phone"></i> 8590251658</a></li>
+                              <li><a href="#" style="color: #ccc;"><i class="fa fa-envelope-o"></i> sonesiji2020@email.com</a></li>
+                          </ul>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-3 col-xs-6">
+                      <div class="footer">
+                          <h3 class="footer-title" style="color: #fff; font-size: 18px; font-weight: bold;">Categories</h3>
+                          <ul class="footer-links">
+                              <li><a href="#" style="color: #ccc;">Hot Deals</a></li>
+                              <li><a href="#" style="color: #ccc;">Laptops</a></li>
+                          </ul>
+                      </div>
+                  </div>
+  
+                  <div class="clearfix visible-xs"></div>
+  
+                  <div class="col-md-3 col-xs-6">
+                      <div class="footer">
+                          <h3 class="footer-title" style="color: #fff; font-size: 18px; font-weight: bold;">Information</h3>
+                          <ul class="footer-links">
+                              <li><a href="#" style="color: #ccc;">About Us</a></li>
+                              <li><a href="#" style="color: #ccc;">Contact Us</a></li>
+                              <li><a href="#" style="color: #ccc;">Privacy Policy</a></li>
+                              <li><a href="#" style="color: #ccc;">Orders and Returns</a></li>
+                              <li><a href="#" style="color: #ccc;">Terms & Conditions</a></li>
+                          </ul>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-3 col-xs-6">
+                      <div class="footer">
+                          <h3 class="footer-title" style="color: #fff; font-size: 18px; font-weight: bold;">Service</h3>
+                          <ul class="footer-links">
+                              <li><a href="#" style="color: #ccc;">My Account</a></li>
+                              <li><a href="#" style="color: #ccc;">View Cart</a></li>
+                              <li><a href="#" style="color: #ccc;">Wishlist</a></li>
+                              <li><a href="#" style="color: #ccc;">Track My Order</a></li>
+                              <li><a href="#" style="color: #ccc;">Help</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <!-- /row -->
+          </div>
+          <!-- /container -->
+      </div>
+      <!-- /top footer -->
+  
+      <!-- bottom footer -->
+      <div id="bottom-footer" class="section">
+          <div class="container">
+              <!-- row -->
+              <div class="row">
+                  <div class="col-md-12 text-center">
+                      <ul class="footer-payments" style="margin-bottom: 30px;">
+                          <li><a href="#" style="color: #ccc;"><i class="fa fa-cc-visa"></i></a></li>
+                          <li><a href="#" style="color: #ccc;"><i class="fa fa-credit-card"></i></a></li>
+                          <li><a href="#" style="color: #ccc;"><i class="fa fa-cc-paypal"></i></a></li>
+                          <li><a href="#" style="color: #ccc;"><i class="fa fa-cc-mastercard"></i></a></li>
+                          <li><a href="#" style="color: #ccc;"><i class="fa fa-cc-discover"></i></a></li>
+                          <li><a href="#" style="color: #ccc;"><i class="fa fa-cc-amex"></i></a></li>
+                      </ul>
+                      <p style="color: #999; font-size: 14px;">&copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | Designed with <i class="fa fa-heart" style="color: #d23f3f;"></i> by <a href="https://colorlib.com" target="_blank" style="color: #999;">Colorlib</a>
+                      </p>
+                  </div>
+              </div>
+              <!-- /row -->
+          </div>
+          <!-- /container -->
+      </div>
+      <!-- /bottom footer -->
+  </footer>
+  
+    <!-- footer end -->
+
+    <!-- Fullscreen search -->
+    <div class="search-wrap">
+      <div class="search-inner">
+        <i class="fas fa-times search-close" id="search-close"></i>
+        <div class="search-cell">
+          <form
+            id="searchForm"
+            action="{% url 'search_results' %}"
+            method="GET"
+          >
+            <div class="search-field-holder">
+              <input
+                type="text"
+                name="q"
+                id="searchInput"
+                class="main-search-input"
+                placeholder="Search Entire Store..."
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS here -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("searchInput");
+        searchInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            document.getElementById("searchForm").submit();
+          }
+        });
+      });
+    </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Script to show the modal -->
+  <script type="text/javascript">
+      $(document).ready(function() {
+          {% if messages %}
+              $('#messageModal').modal('show');
+          {% endif %}
+      });
+  </script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/one-page-nav-min.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/jquery.meanmenu.min.js' %}"></script>
+    <script src="{% static 'js/ajax-form.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.final-countdown.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/instafeed.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

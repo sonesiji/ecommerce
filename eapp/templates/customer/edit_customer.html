@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="margin-top: 100px; padding: 30px; background-color: #f8f9fa; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 style="font-size: 24px; font-weight: bold; color: #333; margin-bottom: 20px;">My Profile</h2>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="full-name" style="font-weight: bold; color: #555;">Full Name:</label>
+                                <input type="text" id="full-name" name="full-name" value="{{ customer.customer_name }}" style="border-radius: 5px; border: 1px solid #ced4da; padding: 10px; margin-bottom: 20px;" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="your-email" style="font-weight: bold; color: #555;">Email:</label>
+                                <input type="email" id="your-email" name="your-email" value="{{ customer.email }}" style="border-radius: 5px; border: 1px solid #ced4da; padding: 10px; margin-bottom: 20px;" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number" style="font-weight: bold; color: #555;">Phone Number:</label>
+                                <input type="text" id="phone-number" name="phone-number" value="{{ customer.contact_number }}" style="border-radius: 5px; border: 1px solid #ced4da; padding: 10px; margin-bottom: 20px;" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" style="font-weight: bold; color: #555;">Password:</label>
+                                <input type="password" id="password" name="password" placeholder="********" style="border-radius: 5px; border: 1px solid #ced4da; padding: 10px; margin-bottom: 20px;" class="form-control" disabled>
+                                <small style="font-size: 14px; color: #888;" class="form-text">To change your password, click <a href="{% url 'change_password' %}">here</a>.</small>
+                            </div>
+                            <button type="submit" style="background-color: #007bff; border: none; color: #fff; font-weight: bold; border-radius: 5px; padding: 10px 20px; transition: background-color 0.3s;" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories and Subcategories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <section class="shop-area">
+            <div class="shop-widget">
+                <h3 class="shop-title">Categories</h3>
+                <ul class="shop-link">
+                    {% for category in categories %}
+                    <li>
+                        <a href="{% url 'category_products' category.id %}">
+                            <h6>{{ category.category_name }}</h6>
+                        </a>
+                        <ul>
+                            {% for subcategory in category.subcategory_set.all %}
+                            <li>
+                                <a href="{% url 'subcategory_products' subcategory.id %}">
+                                    {{ subcategory.subcategory_name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <button onclick="toggleCategories()">Show/Hide Categories</button>
+        </section>
+        <!-- shop-area end -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
