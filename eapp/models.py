@@ -55,7 +55,7 @@ class Product(models.Model):
     subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField()
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(max_digits=7, decimal_places=False)
     image_1 = models.ImageField(upload_to='product_images/')
     image_2 = models.ImageField(upload_to='product_images/', blank=True, null=True)
     image_3 = models.ImageField(upload_to='product_images/', blank=True, null=True)
@@ -77,7 +77,7 @@ class Cart(models.Model):
         return int(self.product.price) * int(self.quantity)
 
     def __str__(self):
-        return f"Cart - Customer: {self.customer.customer_name} - Product: {self.product.product_name} - Qty: {self.quantity}"
+        return f"Cart - Customer: {self.customer.customer_name} - Product: {self.product.name} - Qty: {self.quantity}"
     
     
 class Order(models.Model):

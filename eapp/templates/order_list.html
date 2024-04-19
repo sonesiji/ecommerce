@@ -2,95 +2,107 @@
 
 {% block content %}
 <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Previous background color */
+    padding: 20px;
+}
 
-    .main-menu a {
+.nav ul li a {
     color: black !important;
 }
 
 .container {
+    max-width: 800px;
+    margin: 150px auto;
+    background-color: #ffffff;
     padding: 30px;
-    margin-top: 150px;
-    background-color: #fff1f0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn {
-  margin-top: 10px;
-  padding: 10px 5px;
-  border-radius: 10px;
-  color: #fe4536;
-  background-color: #fff1f0;
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-color: #007bff;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
 }
 
 .btn:hover {
-        background-color: #fcd5d2; /* Darker green */
-        color: #fe3321;
-    }
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+}
 
 </style>
+
 <div class="container">
-  <section class="vh-100 gradient-custom-2">
-    <div class="container py-5 h-100" style="
-    margin-top: 20px;
-">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-md-10 col-lg-8 col-xl-8"> <!-- Increased card width -->
-          {% for order in orders %}
-          <div class="card mb-4" style="border-radius: 16px;">
-            <div class="card-header text-white ">
-              <a href="{% url 'order_detail' order.id %}"><h5 class="mb-0">Order ID: {{ order.id }}</h5></a>
-            </div>
-            <div class="card-body p-4">
-              <a href="{% url 'order_detail' order.id %}">
-              <p class="text-muted mb-2">Order Date: {{ order.order_date }}</p>
-              <p class="text-muted mb-2">Order Status: {{ order.status }}</p>
-            </a>
-              <div id="orderItems{{ order.id }}" style="display: none;"> <!-- Initially hidden -->
-                <div class="table-responsive">
-                  <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Quantity</th>
-                        <th>Price</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for item in order.orderitem_set.all %}
-                      <tr>
-                        <td><img class="img-fluid rounded" src="{{ item.product.image_1.url }}" width="50" alt="{{ item.product.name }}"></td> <!-- Reduced image size -->
-                        <td>{{ item.product.name }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>${{ item.product.price }}</td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <h6 class="fw-normal mb-0">Order Total:</h6>
-                <h6 class="fw-bold mb-0">${{ order.total_price }}</h6>
-              </div>
-              <button class="btn btn-secondary dropdown-toggle" onclick="toggleOrderItems({{ order.id }})">Order Items</button> <!-- Button to toggle order items table -->
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-  </section>
-  
-  <script>
-    function toggleOrderItems(orderId) {
-      var orderItems = document.getElementById('orderItems' + orderId);
-      if (orderItems.style.display === 'none') {
-        orderItems.style.display = 'block';
-      } else {
-        orderItems.style.display = 'none';
-      }
-    }
-  </script>
-  
+<table style="width: 100%; border-collapse: collapse;">
+<thead>
+  <tr>
+      <th style="padding: 10px; border: 1px solid #ddd;">Order ID</th>
+      <th style="padding: 10px; border: 1px solid #ddd;">Order Date</th>
+      <th style="padding: 10px; border: 1px solid #ddd;">Order Status</th>
+      <th style="padding: 10px; border: 1px solid #ddd;">Order Total</th>
+      <th style="padding: 10px; border: 1px solid #ddd;">Image</th>
+      <th style="padding: 10px; border: 1px solid #ddd;">Name</th>
+      <th style="padding: 10px; border: 1px solid #ddd;">Quantity</th>
+      <th style="padding: 10px; border: 1px solid #ddd;">Price</th>
+  </tr>
+</thead>
+<tbody>
+  {% for order in orders %}
+  {% for item in order.orderitem_set.all %}
+  <tr>
+      {% if forloop.first %}
+      <td rowspan="{{ order.orderitem_set.count }}" style="padding: 10px; border: 1px solid #ddd;">{{ order.id }}</td>
+      <td rowspan="{{ order.orderitem_set.count }}" style="padding: 10px; border: 1px solid #ddd;">{{ order.order_date }}</td>
+      <td rowspan="{{ order.orderitem_set.count }}" style="padding: 10px; border: 1px solid #ddd;">{{ order.status }}</td>
+      <td rowspan="{{ order.orderitem_set.count }}" style="padding: 10px; border: 1px solid #ddd;"> ₹{{ order.total_price }}</td>
+      {% endif %}
+      <td style="padding: 10px; border: 1px solid #ddd;"><a href="{% url 'product_detail' item.product.id %}"><img src="{{ item.product.image_1.url }}" width="50" alt="{{ item.product.name }}"></a></td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ item.product.name }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ item.quantity }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;"> ₹{{ item.product.price }}</td>
+  </tr>
+  {% endfor %}
+  {% endfor %}
+</tbody>
+</table>
+</div>
+
+<script>
+function toggleOrderItems(orderId) {
+var orderItems = document.getElementById('orderItems' + orderId);
+if (orderItems.style.display === 'none') {
+  orderItems.style.display = 'block';
+} else {
+  orderItems.style.display = 'none';
+}
+}
+</script>
+
 {% endblock %}

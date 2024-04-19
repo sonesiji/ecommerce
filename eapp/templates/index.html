@@ -43,13 +43,12 @@
                   data-delay=".6s"
                   >PURCHASE</a
                 >
-                <a
-                  class="btn white-btn"
-                  href="shop.html"
-                  data-animation="fadeInRight"
-                  data-delay=".9s"
-                  >CATEGORYS</a
-                >
+                <a class="btn white-btn"
+                href="{% url 'product_list' %}"
+                data-animation="fadeInRight"
+                data-delay=".9s">
+                CATEGORYS
+             </a>
               </div>
             </div>
           </div>
@@ -137,7 +136,7 @@
               </h3>
               <div class="product-meta">
                 <div class="pro-price">
-                  <span>{{ product.price }}</span>
+                  <span>RS {{ product.price }}</span>
                 </div>
               </div>
               <div class="product-wishlist">

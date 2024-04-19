@@ -64,7 +64,7 @@
         width: 60px; /* Increased width for better input size */
         text-align: center;
         border: none;
-        background-color: #2c3e50; /* Changed input background to a darker shade */
+        background-color: #111314; /* Changed input background to a darker shade */
         color: #fff; /* Changed text color to white for better contrast */
         font-size: 16px;
         padding: 8px 12px; /* Increased padding for better input size */
@@ -111,7 +111,7 @@
                                     </td>
                                     <td class="product-name"><a href="#">{{ item.product.name }}</a></td>
                                     <td class="product-price">
-                                        <span class="amount">${{ item.product.price }}</span>
+                                        <span class="amount">RS {{ item.product.price }}</span>
                                     </td>
                                     <td class="product-quantity">
                                         <div class="cart-quantity">
@@ -136,7 +136,7 @@
                                 <h2 style="color: #fff;">Cart totals</h2>
                                 <ul class="mb-20">
                                     <li style="color: #fff;">Subtotal <span>${{ total_price }}</span></li>
-                                    <li style="color: #fff;">Total <span>${{ total_price }}</span></li>
+                                    <li style="color: #fff;">Total <span>RS {{ total_price }}</span></li>
                                 </ul>
                                 <a class="btn theme-btn" href="{% url 'checkout' %}">Proceed to checkout</a>
                             </div>

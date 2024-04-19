@@ -2,48 +2,84 @@
 
 {% block content %}
 <style>
-    .main-menu a {
-    color: black !important;
-}
+    /* Custom styles for the address list page */
+    .address-container {
+        max-width: 800px;
+        margin: 150px auto 50px; /* Added margin to the top */
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center; /* Center the content horizontally */
+    }
 
-.container {
-    padding: 30px;
-    margin-top: 150px;
-    background-color: #fff1f0;
-}
-.btn {
-    background-color: #fe4536;
-}
+    .address-header {
+        font-size: 24px; /* Increased font size for the header */
+        margin-bottom: 20px;
+    }
+
+    .address-card {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .address-card-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .address-card-text {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .address-card-buttons {
+        margin-top: 10px;
+    }
+
+    .btn-edit {
+        background-color: #007bff;
+        color: #fff;
+        margin-right: 10px;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+    }
 </style>
 
-<div class="container">
-    <h2>Address List</h2>
+<div class="address-container">
+    <h2 class="address-header">Address List</h2>
 
     <!-- Card for adding a new address -->
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">Add New Address</h5>
-            <p class="card-text">Click below to add a new address:</p>
-            <a href="{% url 'address_create' %}" class="btn btn-primary">Add Address</a>
-        </div>
+    <div class="address-card">
+        <h5 class="address-card-title">Add New Address</h5>
+        <p class="address-card-text">Click below to add a new address:</p>
+        <a href="{% url 'address_create' %}" class="btn btn-primary">Add Address</a>
     </div>
+
     {% if request.user.customer.address_set.all %}
     <!-- Cards for displaying existing addresses -->
     {% for address in request.user.customer.address_set.all %}
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">{{ address.recepient_name }}</h5>
-            <p class="card-text">Contact: {{ address.recepient_contact }}</p>
-            <p class="card-text">{{ address.address_line1 }}</p>
-            <p class="card-text">{{ address.city }}, {{ address.state }} - {{ address.postal_code }}</p>
-            <a href="{% url 'address_edit' address.id %}" class="btn btn-info">Edit</a>
-            <a href="{% url 'address_delete' address.id %}" class="btn btn-danger">Delete</a>
+    <div class="address-card">
+        <h5 class="address-card-title">{{ address.recepient_name }}</h5>
+        <p class="address-card-text">Contact: {{ address.recepient_contact }}</p>
+        <p class="address-card-text">{{ address.address_line1 }}</p>
+        <p class="address-card-text">{{ address.city }}, {{ address.state }} - {{ address.postal_code }}</p>
+        <div class="address-card-buttons">
+            <a href="{% url 'address_edit' address.id %}" class="btn btn-edit">Edit</a>
+            <a href="{% url 'address_delete' address.id %}" class="btn btn-delete">Delete</a>
         </div>
     </div>
     {% endfor %}
     {% else %}
     <p>No addresses found.</p>
-{% endif %}
+    {% endif %}
 </div>
 
 {% endblock %}
